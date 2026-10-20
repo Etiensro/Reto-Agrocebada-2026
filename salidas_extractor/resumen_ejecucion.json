@@ -1,0 +1,33 @@
+{
+  "fecha_utc": "2026-10-03T12:45:18.217045+00:00",
+  "dataset": "/Users/joshua/Documents/AGRO cebada/DATASET_RETO_AGRO_2026",
+  "shapefile": "/Users/joshua/Documents/AGRO cebada/DATASET_RETO_AGRO_2026/Parcelas_Reto_AGC_CONJUNTO_70_30/Parcelas_Reto_AGC_CONJUNTO.shp",
+  "etiquetas": "/Users/joshua/Documents/AGRO cebada/DATASET_RETO_AGRO_2026/ID_area_rendimiento_70_30_Reto_AgroCebada.csv",
+  "metodo": "zonal",
+  "tiff_procesados": 146,
+  "capas_bandas": 146,
+  "parcelas": 197,
+  "registros_por_imagen": 28762,
+  "registros_clima_mensual": 9456,
+  "valores_ausentes": 0,
+  "estados_extraccion": {
+    "OK": 28753,
+    "COBERTURA_PARCIAL": 9
+  },
+  "crs_shapefile": "EPSG:4326",
+  "crs_geojson": "EPSG:4326",
+  "crs_area_ponderacion": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Lambert Azimuthal Equal Area\",ID[\"EPSG\",9820]],PARAMETER[\"Latitude of natural origin\",19.8017690970135,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",-98.3628752240411,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+  "crs_rasters": [
+    "EPSG:4326",
+    "EPSG:6372"
+  ],
+  "notas": [
+    "NoData, máscaras de raster y números no finitos se excluyen; ceros válidos se conservan.",
+    "Tmin/Tmax son promedios mensuales, no extremos absolutos.",
+    "La media ponderada usa superficie intersectada en proyección equivalente LAEA.",
+    "La cobertura es superficie con valor válido / superficie geométrica de la parcela.",
+    "La temperatura media aproximada se calcula como (Tmin + Tmax) / 2.",
+    "Los IDs se vinculan por nombre, nunca por posición de las filas.",
+    "El mapa contiene datos extraídos; el rendimiento conocido se muestra por separado."
+  ]
+}

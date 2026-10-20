@@ -1,0 +1,13 @@
+# Versiones utilizadas en esta ejecución; Python 3.12.
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+catboost==1.2.10
+matplotlib==3.11.2
+joblib==1.6.0
+# Para regenerar la extracción cuando falten sus resultados:
+rasterio==1.5.2
+shapely==2.1.2
+pyproj==3.8.0
+pyshp==3.1.6

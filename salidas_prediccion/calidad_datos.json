@@ -1,0 +1,131 @@
+{
+  "fuentes": {
+    "etiquetas": "/Users/joshua/Documents/AGRO cebada/DATASET_RETO_AGRO_2026/ID_area_rendimiento_70_30_Reto_AgroCebada.csv",
+    "parcelas": "/Users/joshua/Documents/AGRO cebada/salidas_extractor/parcelas_datos.csv",
+    "clima": "/Users/joshua/Documents/AGRO cebada/salidas_extractor/clima_mensual.csv",
+    "topografia": "/Users/joshua/Documents/AGRO cebada/salidas_extractor/topografia_parcelas.csv",
+    "basico": "/Users/joshua/Documents/AGRO cebada/DATASET_RETO_AGRO_2026/Conjunto_datos_BASICO_AgroCebada2026.csv",
+    "pro": "/Users/joshua/Documents/AGRO cebada/DATASET_RETO_AGRO_2026/Conjunto_datos_PRO_AgroCebada.csv"
+  },
+  "fecha_corte": "2025-10-31",
+  "anio_objetivo": 2025,
+  "meses": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "cloud_max": 20,
+  "cobertura_min": 80.0,
+  "satelites": {
+    "Sentinel-2": {
+      "filas_periodo": 9986,
+      "filas_nube_aceptable": 6437,
+      "filas_descartadas_nube_o_sin_nubosidad": 3549
+    },
+    "Landsat": {
+      "filas_periodo": 6310,
+      "filas_nube_aceptable": 3424,
+      "filas_descartadas_nube_o_sin_nubosidad": 2886
+    },
+    "Planet": {
+      "filas_periodo": 26255,
+      "filas_nube_aceptable": 15852,
+      "filas_descartadas_nube_o_sin_nubosidad": 10403
+    }
+  },
+  "topografia_enmascarada": {
+    "elevacion_m": [
+      "AGC_170"
+    ],
+    "pendiente_grados": [
+      "AGC_020",
+      "AGC_023",
+      "AGC_164",
+      "AGC_170"
+    ]
+  },
+  "clima_celdas_enmascaradas": {
+    "precipitacion_mm": 0,
+    "tmin_promedio_c": 0,
+    "tmax_promedio_c": 0
+  },
+  "fenologia": {
+    "inicio": "2025-04-01",
+    "fin": "2025-10-31",
+    "anios_historicos": [
+      2022,
+      2023,
+      2024
+    ],
+    "paso_dias": {
+      "s2": 8,
+      "landsat": 16,
+      "planet": 5
+    },
+    "parcelas_sin_curva": {
+      "s2_ndvi": 0,
+      "s2_evi": 0,
+      "s2_crc": 0,
+      "s2_mcrc": 0,
+      "s2_ndsvi": 0,
+      "s2_srndi": 0,
+      "s2_lai": 0,
+      "s2_fapar": 0,
+      "s2_savi": 0,
+      "s2_ndti": 0,
+      "s2_sti": 0,
+      "s2_ndwi": 0,
+      "s2_endwi": 0,
+      "s2_msi": 0,
+      "s2_emsi": 0,
+      "s2_dswi2": 0,
+      "s2_dswi3": 0,
+      "s2_dswi4": 0,
+      "s2_dswi5": 0,
+      "s2_nddi": 0,
+      "s2_enddi": 0,
+      "s2_mra": 0,
+      "landsat_vi6t": 0,
+      "planet_ndvi": 0,
+      "planet_evi": 0,
+      "planet_lai": 0,
+      "planet_msavi": 0
+    }
+  },
+  "parcelas": 197,
+  "etiquetas_visibles": 138,
+  "etiquetas_ocultas": 59,
+  "variables_por_grupo": {
+    "contexto": 73,
+    "integrado": 333,
+    "amplio": 593,
+    "sin_geografia": 323,
+    "satelite": 262,
+    "fenologia": 294,
+    "integrado_fenologia": 367,
+    "geografia_km": 2,
+    "geografia": 5,
+    "compacto": 38
+  },
+  "faltantes_por_variable": {
+    "elevacion_m": 1,
+    "elevacion_m_std": 1,
+    "elevacion_m_rango": 1,
+    "pendiente_grados": 4,
+    "pendiente_grados_std": 4,
+    "pendiente_grados_rango": 4,
+    "landsat_vi6t_m06": 5,
+    "landsat_vi6t_m07": 13,
+    "landsat_vi6t_m09": 34,
+    "landsat_vi6t_m10": 1,
+    "landsat_vi6t_std_espacial_m06": 5,
+    "landsat_vi6t_std_espacial_m07": 13,
+    "landsat_vi6t_std_espacial_m09": 34,
+    "landsat_vi6t_std_espacial_m10": 1
+  },
+  "columnas_totalmente_ausentes": []
+}

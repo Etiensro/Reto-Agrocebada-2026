@@ -1,0 +1,131 @@
+{
+  "n_entrenamiento": 110,
+  "n_prueba": 28,
+  "n_conocidas": 138,
+  "n_ocultas": 59,
+  "prueba": {
+    "n": 28,
+    "RMSE_t_ha": 0.5599070720257843,
+    "MAE_t_ha": 0.37623984512873987,
+    "R2": 0.348386976545355,
+    "sesgo_t_ha": 0.08789067947705055,
+    "MAPE_pct": 11.304316359368226,
+    "error_relativo_mediano_pct": 7.209208833928441,
+    "dentro_10_pct": 64.28571428571429,
+    "dentro_20_pct": 92.85714285714286
+  },
+  "baseline_prueba": {
+    "n": 28,
+    "RMSE_t_ha": 0.7738886040177687,
+    "MAE_t_ha": 0.6749999999999997,
+    "R2": -0.24484349063849442,
+    "sesgo_t_ha": 0.3432142857142852,
+    "MAPE_pct": 20.850943130616308,
+    "error_relativo_mediano_pct": 14.999999999999986,
+    "dentro_10_pct": 14.285714285714285,
+    "dentro_20_pct": 64.28571428571429
+  },
+  "bootstrap_prueba": {
+    "RMSE_t_ha": {
+      "inferior_95": 0.31564248258328625,
+      "superior_95": 0.8541348513579406
+    },
+    "MAE_t_ha": {
+      "inferior_95": 0.24603922807419878,
+      "superior_95": 0.5587644110320186
+    }
+  },
+  "diagnostico_espacial_entrenamiento": {
+    "disponible": true,
+    "n_celdas": 21,
+    "RMSE_t_ha": 0.534891012251224,
+    "RMSE_std": 0.10804727986918244,
+    "nota": "Diagnóstico por zonas SOLO en entrenamiento, con configuración ya seleccionada; no es validación espacial anidada ni interviene en la selección final."
+  },
+  "seleccion": {
+    "configuracion": {
+      "nombre": "092_GeoResidual_fenologia",
+      "familia": "GeoResidual",
+      "grupo": "fenologia",
+      "k": "all",
+      "params": {
+        "n_vecinos": 30,
+        "k_sel": 3,
+        "alpha": 80.0
+      }
+    },
+    "cv_rmse": 0.4593625765642303,
+    "cv_rmse_std": 0.1289419581880726,
+    "cv_baseline_rmse": 0.8750775437894792,
+    "folds": 5,
+    "repeticiones": 3,
+    "n_candidatos": 100,
+    "criterio": "Menor RMSE de predicciones fuera de fold, solo entrenamiento.",
+    "test_utilizado_para_seleccion": false
+  },
+  "test_utilizado_para_seleccion": false,
+  "mejora_RMSE_vs_media_pct": 27.65017224456653,
+  "validacion_cruzada_138": {
+    "n": 138,
+    "RMSE_t_ha": 0.4751239594748822,
+    "MAE_t_ha": 0.34117149114037926,
+    "R2": 0.686130462553033,
+    "sesgo_t_ha": -0.015267865800658063,
+    "MAPE_pct": 9.713494954428212,
+    "error_relativo_mediano_pct": 6.629118254664622,
+    "dentro_10_pct": 65.21739130434783,
+    "dentro_20_pct": 92.7536231884058,
+    "RMSE_std_folds": 0.1072404323936454,
+    "folds": 5,
+    "repeticiones": 3,
+    "nota": "Configuración fija; incluye las 110 usadas para elegirla, por lo que es complementaria a la prueba."
+  },
+  "intervalos_prediccion_t_ha": {
+    "Calpulalpan": {
+      "80": 0.5598961726044119,
+      "90": 0.6004901088340179,
+      "n": 30
+    },
+    "Chignahuapan": {
+      "80": 0.6223103017518351,
+      "90": 0.7660347879665312,
+      "n": 71
+    },
+    "Otros municipios": {
+      "80": 0.4744794139456258,
+      "90": 0.7315165284904805,
+      "n": 21
+    },
+    "Singuilucan": {
+      "80": 0.4884604008261001,
+      "90": 1.1903093828500553,
+      "n": 16
+    },
+    "Todas": {
+      "80": 0.5453258773325115,
+      "90": 0.7066030620782344,
+      "n": 138
+    }
+  },
+  "variables_modelo_final": {
+    "componente_0": {
+      "variables": [
+        "log_area_ha",
+        "fenh_s2_evi_2022_base",
+        "fenh_s2_ndvi_media_base",
+        "fenh_s2_evi_2023_base"
+      ],
+      "correlacion_con_residuo": {
+        "fenh_s2_evi_2022_base": 0.3103143496829241,
+        "fenh_s2_ndvi_media_base": 0.2682943173500161,
+        "fenh_s2_evi_2023_base": 0.25346322525972986
+      },
+      "coeficientes_estandarizados": {
+        "log_area_ha": -0.010372207652917426,
+        "fenh_s2_evi_2022_base": 0.06248615015697985,
+        "fenh_s2_ndvi_media_base": 0.030422875648172955,
+        "fenh_s2_evi_2023_base": 0.03208043549491571
+      }
+    }
+  }
+}

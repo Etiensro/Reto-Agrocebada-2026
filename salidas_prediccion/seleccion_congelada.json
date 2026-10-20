@@ -1,0 +1,21 @@
+{
+  "configuracion": {
+    "nombre": "092_GeoResidual_fenologia",
+    "familia": "GeoResidual",
+    "grupo": "fenologia",
+    "k": "all",
+    "params": {
+      "n_vecinos": 30,
+      "k_sel": 3,
+      "alpha": 80.0
+    }
+  },
+  "cv_rmse": 0.4593625765642303,
+  "cv_rmse_std": 0.1289419581880726,
+  "cv_baseline_rmse": 0.8750775437894792,
+  "folds": 5,
+  "repeticiones": 3,
+  "n_candidatos": 100,
+  "criterio": "Menor RMSE de predicciones fuera de fold, solo entrenamiento.",
+  "test_utilizado_para_seleccion": false
+}

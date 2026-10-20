@@ -1,0 +1,703 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AgroCebada · Inteligencia Agrícola y Predicción de Rendimiento · Reto FIRA 2026</title>
+<meta name="description" content="Plataforma de inteligencia agrícola para pronóstico de cosecha de cebada en Hidalgo, Puebla y Tlaxcala. Reto AgroCebada FIRA 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="plataforma-layout">
+
+  <!-- Sidebar Persistente -->
+  <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+    <div class="sidebar-header">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"></path>
+          <path d="M12 6v12M8 10l4-4 4 4M8 14l4 4 4-4"></path>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>AgroCebada</h1>
+        <span>Reto FIRA 2026</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebar-nav" role="tablist">
+      <div class="nav-section-title">Operación y Territorio</div>
+      
+      <button class="nav-item" role="tab" id="tab-resumen" aria-controls="vista-resumen" aria-selected="true" data-vista="resumen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>Resumen General</span>
+      </button>
+
+      <button class="nav-item" role="tab" id="tab-mapa" aria-controls="vista-mapa" aria-selected="false" data-vista="mapa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+        <span>Mapa de Parcelas</span>
+        <span class="nav-badge" id="badge-total-parcelas">197</span>
+      </button>
+
+      <button class="nav-item" role="tab" id="tab-prediccion" aria-controls="vista-prediccion" aria-selected="false" data-vista="prediccion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>Predicción por Parcela</span>
+      </button>
+
+      <button class="nav-item" role="tab" id="tab-simulador" aria-controls="vista-simulador" aria-selected="false" data-vista="simulador">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        <span>Simulador de Escenarios</span>
+      </button>
+
+      <div class="nav-section-title">Ciencia de Datos</div>
+
+      <button class="nav-item" role="tab" id="tab-ambiental" aria-controls="vista-ambiental" aria-selected="false" data-vista="ambiental">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+        <span>Análisis Ambiental</span>
+      </button>
+
+      <button class="nav-item" role="tab" id="tab-explicabilidad" aria-controls="vista-explicabilidad" aria-selected="false" data-vista="explicabilidad">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span>Explicabilidad (SHAP/Perm)</span>
+      </button>
+
+      <button class="nav-item" role="tab" id="tab-evaluacion" aria-controls="vista-evaluacion" aria-selected="false" data-vista="evaluacion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span>Evaluación y Métricas</span>
+      </button>
+
+      <div class="nav-section-title">Finanzas y Marco</div>
+
+      <button class="nav-item" role="tab" id="tab-credito" aria-controls="vista-credito" aria-selected="false" data-vista="credito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+        <span>Riesgo y Crédito FIRA</span>
+      </button>
+
+      <button class="nav-item" role="tab" id="tab-metodologia" aria-controls="vista-metodologia" aria-selected="false" data-vista="metodologia">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Metodología y Fuentes</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-row">
+        <span class="status-indicator" title="Modelo verificado"></span>
+        <span>GeoResidual Final · Conforme</span>
+      </div>
+      <div style="margin-top:4px; opacity:0.75;">Ciclo Agrícola 2025</div>
+    </div>
+  </aside>
+
+  <!-- Área de Contenido Principal -->
+  <div class="main-wrapper">
+    <header class="app-header">
+      <div class="header-left">
+        <button class="btn-sidebar-toggle" id="btn-toggle-sidebar" aria-label="Alternar menú lateral">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="header-breadcrumbs">
+          <span>AgroCebada FIRA</span>
+          <span class="sep">/</span>
+          <span class="current" id="breadcrumb-current">Resumen General</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="chip-tag" id="header-chip-ocultas" title="Parcelas reservadas para calificar el concurso">
+          <span style="color:#D97706; font-size:14px; line-height:1;">●</span>
+          <span>59 por estimar</span>
+        </div>
+        <div class="chip-tag" id="header-chip-conocidas" title="Parcelas de referencia con cosecha real">
+          <span style="color:#2D6A4F; font-size:14px; line-height:1;">●</span>
+          <span>138 observadas</span>
+        </div>
+        <button class="btn-icon-text" id="tema" type="button" aria-label="Cambiar tema de color">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <span id="tema-texto">Tema</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="content-area">
+
+      <!-- ========================================================
+           SECCIÓN A: RESUMEN GENERAL
+           ======================================================== -->
+      <section class="vista-panel" id="vista-resumen" role="tabpanel" aria-labelledby="tab-resumen">
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Resumen General del Portafolio y Cobertura</h2>
+            <p>Monitoreo integral de parcelas cebaderas en Hidalgo, Puebla y Tlaxcala. Resultados del modelo geográfico-residual para el ciclo abril–octubre 2025.</p>
+          </div>
+          <div class="view-header-actions">
+            <button class="btn btn-primary btn-sm" id="btn-ir-mapa-desde-resumen" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon></svg>
+              <span>Explorar en Mapa</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- KPIs Principales -->
+        <div class="grid-4" id="resumen-kpis"></div>
+
+        <!-- Gráficas y Resumen Territorial -->
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Distribución de Rendimiento: Observado vs Estimado</h3>
+                <p class="card-subtitle">Comparación de densidades de cosecha entre parcelas conocidas y estimadas</p>
+              </div>
+            </div>
+            <div id="chart-resumen-distribucion" style="min-height:260px;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Desglose de Superficie y Producción por Estado</h3>
+                <p class="card-subtitle">Distribución geográfica en Puebla, Hidalgo y Tlaxcala</p>
+              </div>
+            </div>
+            <div id="tabla-resumen-estados" class="table-responsive-container"></div>
+          </div>
+        </div>
+
+        <!-- Acceso Rápido y Portafolio a Calificar -->
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Parcelas del Reto FIRA 2026 (59 a Calificar)</h3>
+                <p class="card-subtitle">Predicciones oficiales sin etiqueta enviadas en predicciones_59.csv</p>
+              </div>
+              <button class="btn btn-outline btn-sm" id="btn-descargar-59-csv" type="button">Descargar 59 CSV</button>
+            </div>
+            <div id="resumen-lista-59" class="table-responsive-container" style="max-height:280px; overflow-y:auto;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Validación del Modelo y Control de Fuga</h3>
+                <p class="card-subtitle">Métricas verificadas con validación cruzada 5×3 sobre 138 parcelas conocidas</p>
+              </div>
+            </div>
+            <div id="resumen-calidad-modelo"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN B: MAPA DE PARCELAS
+           ======================================================== -->
+      <section class="vista-panel" id="vista-mapa" role="tabpanel" aria-labelledby="tab-mapa" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Mapa Cartográfico y Satelital de Parcelas</h2>
+            <p>Visualización espacial de alta precisión con integración cartográfica MapLibre y capas temáticas de rendimiento, errores y territorio.</p>
+          </div>
+        </div>
+
+        <!-- Barra de Controles y Filtros -->
+        <div class="controls-bar">
+          <div class="control-group">
+            <span class="control-label">Conjunto:</span>
+            <div class="segmented-control" id="f-conjunto"></div>
+          </div>
+          <div class="control-group">
+            <span class="control-label">Estado:</span>
+            <div class="segmented-control" id="f-estado"></div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="f-capa">Capa:</label>
+            <select class="select-input" id="f-capa"></select>
+          </div>
+          <div class="control-group" id="g-anio">
+            <label class="control-label" for="f-anio">Año:</label>
+            <select class="select-input" id="f-anio"></select>
+          </div>
+          <div class="control-group" id="g-mes">
+            <label class="control-label" for="f-mes">Mes:</label>
+            <select class="select-input" id="f-mes"></select>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="f-fondo">Fondo:</label>
+            <select class="select-input" id="f-fondo">
+              <option value="satelite">Satélite con nombres</option>
+              <option value="calles">Calles y localidades</option>
+              <option value="ninguno">Sin fondo (rápido / offline)</option>
+            </select>
+          </div>
+          <div class="control-group" style="flex:1; min-width:180px;">
+            <label class="control-label" for="f-buscar">Buscar:</label>
+            <input class="text-input" id="f-buscar" type="search" list="ids-mapa" placeholder="Ej. AGC_044 o Chignahuapan" autocomplete="off" style="width:100%;">
+            <datalist id="ids-mapa"></datalist>
+          </div>
+          <button class="btn btn-outline btn-sm" id="descargar-capa" type="button" title="Descargar datos de la capa visible en formato CSV">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Descargar CSV</span>
+          </button>
+        </div>
+
+        <div class="grid-map-layout">
+          <!-- Lienzo del Mapa -->
+          <div>
+            <div class="map-wrapper">
+              <div class="map-canvas-container" id="lienzo">
+                <div id="fondo-mapa" aria-hidden="true"></div>
+                <svg id="mapa" role="img" aria-label="Mapa interactivo de parcelas georreferenciadas"></svg>
+                <div class="map-tools-overlay">
+                  <button type="button" class="map-tool-btn" id="z-mas" aria-label="Acercar mapa">+</button>
+                  <button type="button" class="map-tool-btn" id="z-menos" aria-label="Alejar mapa">−</button>
+                  <button type="button" class="map-tool-btn" id="z-todo" aria-label="Ver todas las parcelas" title="Ver todo">⌂</button>
+                </div>
+                <div class="map-scale-overlay" id="escala"></div>
+                <div class="fondo-estado" id="fondo-estado" role="status"></div>
+                <div class="fondo-creditos" id="fondo-creditos"></div>
+              </div>
+              <div class="map-footer">
+                <div class="legend-bar-container" id="leyenda"></div>
+                <div class="legend-marker-note">
+                  <span><i></i> Borde discontinuo: 59 por estimar (Reto FIRA)</span>
+                  <span><i class="solid"></i> Borde sólido: 138 conocidas</span>
+                </div>
+              </div>
+            </div>
+            <!-- Chips de acceso rápido por municipio -->
+            <div class="municipality-chips" id="chips-mun"></div>
+          </div>
+
+          <!-- Drawer de detalle lateral -->
+          <aside class="parcel-drawer">
+            <div class="card-header" style="margin-bottom:0;">
+              <h3 class="card-title">Ficha Rápida</h3>
+              <span class="text-muted" style="font-size:11px;">Clic en parcela</span>
+            </div>
+            <div id="detalle" aria-live="polite"></div>
+          </aside>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN C: PREDICCIÓN POR PARCELA (FICHA Y FACTORES)
+           ======================================================== -->
+      <section class="vista-panel" id="vista-prediccion" role="tabpanel" aria-labelledby="tab-prediccion" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Predicción Detallada y Ficha Técnica por Parcela</h2>
+            <p>Consulta individual de predicciones generadas por el modelo oficial. Desglose matemático entre efecto geográfico de vecindad y ajuste residual Ridge.</p>
+          </div>
+          <div class="view-header-actions">
+            <button class="btn btn-outline btn-sm" id="btn-imprimir-ficha" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span>Imprimir / Exportar Ficha</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="controls-bar" style="margin-bottom:20px;">
+          <div class="control-group" style="flex:1; max-width:400px;">
+            <label class="control-label" for="sel-parcela-ficha">Seleccionar Parcela:</label>
+            <select class="select-input" id="sel-parcela-ficha" style="width:100%;"></select>
+          </div>
+          <div class="control-group">
+            <span class="text-muted" style="font-size:12px;" id="info-parcela-ficha-estado"></span>
+          </div>
+        </div>
+
+        <!-- Ficha técnica completa de la parcela -->
+        <div id="contenedor-ficha-completa"></div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN D: SIMULADOR DE ESCENARIOS
+           ======================================================== -->
+      <section class="vista-panel" id="vista-simulador" role="tabpanel" aria-labelledby="tab-simulador" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Simulador de Escenarios Agronómicos</h2>
+            <p>Evaluación interactiva de escenarios hipotéticos modificando coordenadas, superficie o verdor previo. Cálculo en tiempo real con el algoritmo GeoResidual.</p>
+          </div>
+        </div>
+
+        <div class="alert-banner warning">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <div>
+            <b>Modo de Simulación Hipotética:</b> Los valores calculados son proyecciones matemáticas del modelo para escenarios "qué pasaría si". No representan cosechas observadas ni garantizan rendimientos futuros.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Formulario de Parámetros -->
+          <form class="card" id="sim-form" autocomplete="off">
+            <div class="card-header">
+              <h3 class="card-title">Parámetros del Escenario</h3>
+              <button class="btn btn-outline btn-sm" type="button" id="sim-reset">Restablecer valores</button>
+            </div>
+
+            <div class="sim-field" style="margin-bottom:14px;">
+              <label for="sim-parcela">Cargar datos base de una parcela existente:</label>
+              <select class="select-input" id="sim-parcela"></select>
+            </div>
+
+            <div class="sim-field" style="margin-bottom:14px;">
+              <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
+                <input type="checkbox" id="sim-excluir" checked style="margin-top:2px;">
+                <span><b>Evaluar como terreno nuevo:</b> Excluye el historial de producción de la parcela base de los vecinos de referencia para garantizar una estimación imparcial.</span>
+              </label>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+              <div class="sim-field">
+                <label for="sim-lon">Longitud (°):</label>
+                <input class="text-input" id="sim-lon" type="number" step="0.0001">
+              </div>
+              <div class="sim-field">
+                <label for="sim-lat">Latitud (°):</label>
+                <input class="text-input" id="sim-lat" type="number" step="0.0001">
+              </div>
+            </div>
+
+            <div class="sim-field" style="margin-bottom:16px;">
+              <label for="sim-area">Superficie (ha):</label>
+              <input class="text-input" id="sim-area" type="number" step="0.1" min="0.1">
+            </div>
+
+            <div class="sim-field" style="margin-bottom:14px;">
+              <label for="sim-evi22">Salud previa del terreno (EVI primavera 2022):</label>
+              <input id="sim-evi22" type="range">
+              <div class="field-meta" id="sim-evi22-v"></div>
+            </div>
+
+            <div class="sim-field" style="margin-bottom:14px;">
+              <label for="sim-evi23">Salud previa del terreno (EVI primavera 2023):</label>
+              <input id="sim-evi23" type="range">
+              <div class="field-meta" id="sim-evi23-v"></div>
+            </div>
+
+            <div class="sim-field" style="margin-bottom:14px;">
+              <label for="sim-ndvi">Salud promedio multianual (NDVI media 2022–2024):</label>
+              <input id="sim-ndvi" type="range">
+              <div class="field-meta" id="sim-ndvi-v"></div>
+            </div>
+
+            <p class="text-muted" style="font-size:11.5px; margin-top:8px;">
+              Las variables de verdor satelital previas a la siembra capturan la productividad intrínseca y fertilidad del suelo acumulada antes del ciclo agrícola.
+            </p>
+          </form>
+
+          <!-- Resultados de la Simulación -->
+          <div id="sim-resultado" aria-live="polite"></div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN E: ANÁLISIS AMBIENTAL
+           ======================================================== -->
+      <section class="vista-panel" id="vista-ambiental" role="tabpanel" aria-labelledby="tab-ambiental" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Análisis Ambiental y Datos Satelitales</h2>
+            <p>Distribución de variables agroclimáticas, topográficas y series satelitales (Sentinel-2, Landsat, Planet, CHIRPS, CEM 4.0). Relaciones observadas sin asunciones espurias.</p>
+          </div>
+        </div>
+
+        <div class="grid-4" id="ambiental-kpis"></div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Dispersión Ambiental vs Rendimiento Observado</h3>
+              <select class="select-input" id="sel-var-dispersion"></select>
+            </div>
+            <div id="chart-dispersion-ambiental" style="min-height:360px;"></div>
+            <p class="text-muted" style="font-size:11.5px; margin-top:10px;">
+              * Gráfica sobre las 138 parcelas con rendimiento conocido en campo. Las líneas y agrupaciones muestran asociación estadística regional.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Comportamiento Climático Mensual (Ciclo 2025)</h3>
+              <select class="select-input" id="sel-var-clima-mensual">
+                <option value="PREC">Precipitación (mm)</option>
+                <option value="Tmin">Temperatura mínima (°C)</option>
+                <option value="Tmax">Temperatura máxima (°C)</option>
+              </select>
+            </div>
+            <div id="chart-clima-mensual" style="min-height:360px;"></div>
+            <p class="text-muted" style="font-size:11.5px; margin-top:10px;">
+              Extracción zonal promedio desde CHIRPS y CHIRTS-ERA5 para las parcelas de cada estado.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Estadísticas Comparativas de Índices Satelitales y Relieve</h3>
+          </div>
+          <div id="tabla-resumen-ambiental" class="table-responsive-container"></div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN F: EXPLICABILIDAD DEL MODELO
+           ======================================================== -->
+      <section class="vista-panel" id="vista-explicabilidad" role="tabpanel" aria-labelledby="tab-explicabilidad" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Explicabilidad Global y Local del Modelo</h2>
+            <p>Evidencia empírica de importancia de factores mediante pruebas de permutación sobre validación cruzada y pesos de coeficientes del algoritmo final.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Importancia Global por Permutación de Variables</h3>
+                <p class="card-subtitle">Incremento en RMSE (t/ha) al desorganizar cada bloque de información</p>
+              </div>
+            </div>
+            <div id="chart-importancia-variables" style="min-height:340px;"></div>
+            <div class="alert-banner info" style="margin-top:14px; margin-bottom:0;">
+              <div>
+                <b>Dominancia Geográfica:</b> La ubicación espacial es el factor más determinante (+0.53 t/ha de error si se elimina). Le sigue el verdor histórico previo a la siembra (Sentinel-2 EVI y NDVI 2022-2024).
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Coeficientes de la Regresión Residual Ridge</h3>
+                <p class="card-subtitle">Sensibilidad del rendimiento respecto a variaciones estandarizadas</p>
+              </div>
+            </div>
+            <div id="chart-coeficientes-ridge" style="min-height:340px;"></div>
+            <p class="text-muted" style="font-size:12px; margin-top:12px;">
+              Los coeficientes estandarizados ajustan el residuo después de sustraer el efecto de los 30 vecinos más cercanos. La regularización L2 (alpha = 80.0) previene sobreajuste.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Matriz de Aportes Intra-Municipio de Índices Satelitales</h3>
+          </div>
+          <div id="tabla-explicabilidad-indices" class="table-responsive-container"></div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN G: EVALUACIÓN Y MÉTRICAS
+           ======================================================== -->
+      <section class="vista-panel" id="vista-evaluacion" role="tabpanel" aria-labelledby="tab-evaluacion" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Evaluación Rigurosa y Métricas de Desempeño</h2>
+            <p>Separación metodológica estricta entre validación cruzada interna (138 parcelas) y prueba independiente reservada (28 parcelas). Análisis de residuos sin fuga de datos.</p>
+          </div>
+        </div>
+
+        <div class="grid-4" id="evaluacion-kpis"></div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Validación Cruzada 5×3 (138 Parcelas Conocidas)</h3>
+                <p class="card-subtitle">R² = 0.686 · RMSE = 0.475 t/ha · MAE = 0.341 t/ha</p>
+              </div>
+            </div>
+            <div id="chart-eval-cv" style="min-height:340px;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Prueba Independiente Reservada (28 Parcelas)</h3>
+                <p class="card-subtitle">R² = 0.348 · RMSE = 0.560 t/ha · Diagnosticada antes de consultar</p>
+              </div>
+            </div>
+            <div id="chart-eval-prueba" style="min-height:340px;"></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Análisis de Robustez e Impacto de Valores Atípicos</h3>
+            </div>
+            <div id="evaluacion-diagnostico-atipicos" class="text-secondary" style="font-size:13px; line-height:1.6;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Desempeño y Error por Municipio (Validación Cruzada)</h3>
+            </div>
+            <div id="tabla-eval-municipios" class="table-responsive-container"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Comparativa de Familias de Modelos Candidatos (Top Modelos)</h3>
+          </div>
+          <div id="tabla-comparativa-familias" class="table-responsive-container"></div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN H: RIESGO PRODUCTIVO Y CRÉDITO FIRA
+           ======================================================== -->
+      <section class="vista-panel" id="vista-credito" role="tabpanel" aria-labelledby="tab-credito" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Viabilidad Financiera y Análisis de Riesgo Crediticio</h2>
+            <p>Herramienta analítica para intermediarios financieros e inclusión crediticia FIRA. Estimación de probabilidad empírica de alcanzar el punto de equilibrio económico.</p>
+          </div>
+        </div>
+
+        <!-- Calculadora de Punto de Equilibrio -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="grid-3" style="margin-bottom:0; align-items:center;">
+            <div>
+              <label class="control-label" for="umbral">Punto de equilibrio exigido (t/ha):</label>
+              <div style="display:flex; align-items:center; gap:12px; margin-top:6px;">
+                <input id="umbral" type="range" min="1.5" max="5.5" step="0.1" style="flex:1;">
+                <b id="umbral-v" class="mono" style="font-size:18px; color:var(--brand-700); min-width:65px;">3.5 t/ha</b>
+              </div>
+            </div>
+            <div>
+              <label class="control-label" for="calc-costo">Costo de Producción ($/ha):</label>
+              <input class="text-input" id="calc-costo" type="number" value="19250" step="500" style="width:100%; margin-top:6px;">
+            </div>
+            <div>
+              <label class="control-label" for="calc-precio">Precio de Venta ($/tonelada):</label>
+              <input class="text-input" id="calc-precio" type="number" value="5500" step="100" style="width:100%; margin-top:6px;">
+            </div>
+          </div>
+          <div class="text-muted" style="font-size:11.5px; margin-top:10px;">
+            * El punto de equilibrio representa las toneladas por hectárea mínimas necesarias para cubrir los costos operativos y de financiamiento (Costo / Precio).
+          </div>
+        </div>
+
+        <!-- Tarjetas de Segmentación de Riesgo -->
+        <div class="grid-3" id="riesgo-resumen-cards"></div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Curva de Sensibilidad del Portafolio a Calificar</h3>
+              <p class="card-subtitle">Porcentaje de parcelas viables frente a diferentes exigencias de rendimiento</p>
+            </div>
+          </div>
+          <div id="chart-sensibilidad-riesgo" style="min-height:260px;"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Directorio de Viabilidad Crediticia (59 Parcelas Concurso)</h3>
+              <p class="card-subtitle">Probabilidad calculada contra residuos históricos de cada zona</p>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="filtro-riesgo-nivel">Filtrar:</label>
+              <select class="select-input" id="filtro-riesgo-nivel">
+                <option value="todos">Todos los niveles</option>
+                <option value="alta">Viable (≥80 %)</option>
+                <option value="media">Evaluar (50–80 %)</option>
+                <option value="baja">Riesgo elevado (&lt;50 %)</option>
+              </select>
+            </div>
+          </div>
+          <div id="tabla-credito-riesgo" class="table-responsive-container"></div>
+        </div>
+
+        <div class="alert-banner info" style="margin-top:20px;">
+          <div>
+            <b>Nota sobre Inclusión Financiera:</b> Esta herramienta cuantitativa apoya la toma de decisiones del oficial de crédito de FIRA para reducir asimetrías de información, pero no sustituye el análisis de solvencia, garantías ni condiciones de manejo del productor.
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================
+           SECCIÓN I: METODOLOGÍA, PREGUNTAS GUÍA Y GLOSARIO
+           ======================================================== -->
+      <section class="vista-panel" id="vista-metodologia" role="tabpanel" aria-labelledby="tab-metodologia" hidden>
+        <div class="view-header">
+          <div class="view-header-main">
+            <h2>Metodología, Preguntas Científicas FIRA y Glosario</h2>
+            <p>Memoria técnica detallada del diseño experimental, fuentes de datos satelitales y climáticas, resolución de preguntas guía y glosario de términos.</p>
+          </div>
+        </div>
+
+        <!-- Tarjetas de Preguntas Guía del Concurso -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-header">
+            <h3 class="card-title">Respuestas a las Preguntas Guía del Reto FIRA 2026</h3>
+          </div>
+          <div id="metodologia-preguntas-guia"></div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Flujo Metodológico -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Flujo de Procesamiento y Modelación</h3>
+            </div>
+            <div id="metodologia-flujo" class="text-secondary" style="font-size:13px; line-height:1.6;"></div>
+          </div>
+
+          <!-- Fuentes y Límites -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Fuentes de Datos y Límites Conocidos</h3>
+            </div>
+            <div id="metodologia-fuentes" class="text-secondary" style="font-size:13px; line-height:1.6;"></div>
+          </div>
+        </div>
+
+        <!-- Glosario Técnico -->
+        <div class="card" style="margin-top:20px;">
+          <div class="card-header">
+            <h3 class="card-title">Glosario de Términos Agronómicos y Métricas de Machine Learning</h3>
+          </div>
+          <div id="metodologia-glosario"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Tooltip Flotante -->
+<div id="tip" role="tooltip" hidden></div>
+
+<!-- Scripts de Datos y Modelo -->
+<script>
+window.PANEL_CONFIG = {
+  fondo: true,
+  fondoInicial: "satelite",
+  territorio: true,
+  buscador: true
+};
+</script>
+<script src="datos.js"></script>
+<script src="territorio.js"></script>
+<script src="modelo.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

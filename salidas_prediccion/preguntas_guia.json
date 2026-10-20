@@ -1,0 +1,58 @@
+{
+  "nota": "Validación cruzada 5x4 sobre las 138 parcelas conocidas, posterior a la prueba; no interviene en la selección. Aporte positivo = reduce el RMSE.",
+  "referencia_ubicacion_superficie": {
+    "RMSE_t_ha": 0.49316549903520884,
+    "R2": 0.6663122151043765
+  },
+  "pregunta1_indice_mayor_aporte": {
+    "VARIABLE": "LAI (Planet)",
+    "APORTE_SOBRE_UBICACION_T_HA": 0.0055523259618489584,
+    "APORTE_EE_T_HA": 0.002776820956740015,
+    "APORTE_CLARO": false,
+    "METRICA_MAS_ASOCIADA_INTRA_MUNICIPIO": "fen_planet_lai_base"
+  },
+  "pregunta1_aportes_claros": [
+    "EVI (Sentinel-2, historial 2022-2024)",
+    "NDVI (Sentinel-2, historial 2022-2024)"
+  ],
+  "pregunta1_indice_mayor_poder_solo": {
+    "VARIABLE": "MSAVI (Planet)",
+    "RMSE_SOLO_T_HA": 0.6947312455639083,
+    "R2_SOLO": 0.3363630819684744
+  },
+  "pregunta1_mejor_familia_incluyendo_historial": {
+    "VARIABLE": "EVI (Sentinel-2, historial 2022-2024)",
+    "APORTE_SOBRE_UBICACION_T_HA": 0.013812433156378034,
+    "APORTE_EE_T_HA": 0.003735224728514983,
+    "APORTE_CLARO": true
+  },
+  "pregunta2_variable_climatica_mayor_peso": {
+    "VARIABLE": "Amplitud térmica",
+    "RMSE_SOLO_T_HA": 0.5292107114454351,
+    "R2_SOLO": 0.612410802017082,
+    "APORTE_SOBRE_UBICACION_T_HA": -0.0005805176955951952
+  },
+  "pregunta3_mejor_combinacion": {
+    "COMBINACION": "Ubicación + Superficie",
+    "RMSE_MEJOR_T_HA": 0.48328061393853483,
+    "ALGORITMO_MEJOR": "RIDGE",
+    "RMSE_RIDGE_T_HA": 0.48328061393853483,
+    "RMSE_EXTRATREES_T_HA": 0.5028019809483654
+  },
+  "pregunta3_empatadas_con_la_mejor": [
+    "Ubicación + Superficie",
+    "Ubicación + Historial satelital",
+    "Ubicación + Superficie + Historial satelital + Clima 2025",
+    "Ubicación + Superficie + Clima 2025",
+    "Ubicación + Superficie + Historial satelital",
+    "Ubicación + Historial satelital + Clima 2025 + Topografía",
+    "Ubicación + Superficie + Historial satelital + Topografía",
+    "Ubicación + Historial satelital + Clima 2025",
+    "Ubicación + Historial satelital + Topografía",
+    "Ubicación + Superficie + Historial satelital + Clima 2025 + Topografía",
+    "Ubicación + Superficie + Topografía",
+    "Historial satelital + Clima 2025",
+    "Historial satelital + Clima 2025 + Topografía",
+    "Superficie + Historial satelital + Clima 2025"
+  ]
+}
